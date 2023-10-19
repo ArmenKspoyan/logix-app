@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
@@ -27,6 +28,11 @@ class AuthController extends Controller
     public function registration(RegisterRequest $request): ErrorResource|SuccessResource
     {
         return $this->registerService->register($request->validated());
+    }
+
+    public function login(LoginRequest $request): ErrorResource|SuccessResource
+    {
+        return $this->registerService->login($request->validated());
     }
 
 }
