@@ -13,4 +13,6 @@ interface BaseRepository
 
     public function find(int $id): mixed;
 
+    public function update(int $id, array $attributes): mixed;
+
 }

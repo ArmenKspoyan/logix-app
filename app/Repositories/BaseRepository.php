@@ -28,4 +28,9 @@ abstract class BaseRepository implements BaseRepositoryContract
     {
         return $this->model->find($id);
     }
+
+    public function update(int $id, array $attributes): mixed
+    {
+        return $this->model->find($id)->update($attributes);
+    }
 }
