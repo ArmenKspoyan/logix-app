@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\ChangeEmailConfirmRequest;
+use App\Http\Requests\User\ChangeEmailRequest;
 use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
@@ -73,6 +75,22 @@ class UserController extends Controller
             'message' => trans('Password reset link has been sent to your email')
         ]);
 
+    }
+
+    public function changeEmail(ChangeEmailRequest $request): SuccessResource|ErrorResource
+    {
+        $this->userService->changeEmail($request->validated());
+        return SuccessResource::make([
+            'message' => 'Link for change email successfully sent'
+        ]);
+    }
+
+    public function changeEmailConfirm(ChangeEmailConfirmRequest $request): SuccessResource
+    {
+        $this->userService->changeEmailConfirm($request->validated());
+        return SuccessResource::make([
+            'message' => 'Email changed',
+        ]);
     }
 
 }

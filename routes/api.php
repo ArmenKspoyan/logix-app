@@ -24,6 +24,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('settings')->group(function () {
         Route::post('/password/change', [UserController::class, 'changePassword']);
         Route::get('/password/reset-password-link', [UserController::class, 'resetPasswordLink']);
+
+        Route::post('/email/change', [UserController::class, 'changeEmail']);
+        Route::post('/email/change/confirm', [UserController::class, 'changeEmailConfirm']);
+
+
     });
 });
 
