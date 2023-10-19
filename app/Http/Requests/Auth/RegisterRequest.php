@@ -18,4 +18,14 @@ class RegisterRequest extends FormRequest
             'password' => 'required|confirmed|min:6',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name' => 'The :attribute is required.',
+            'last_name' => 'The :attribute is required.',
+            'password' => 'The :attribute is required.',
+            'email' => 'The :attribute is required.',
+        ];
+    }
 }
