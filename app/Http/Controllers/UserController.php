@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
+use App\Repositories\Contracts\User\IUserRepository;
 use App\Services\User\UserService;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Mail\Message;
 
 
 class UserController extends Controller
@@ -19,12 +18,22 @@ class UserController extends Controller
     protected UserService $userService;
 
     /**
-     * AuthController constructor.
-     * @param UserService $userService
+     * @var IUserRepository
      */
-    public function __construct(UserService $userService)
+    protected IUserRepository $userRepository;
+
+    /**
+     * UserController constructor.
+     * @param UserService $userService
+     * @param IUserRepository $userRepository
+     */
+    public function __construct(
+        UserService     $userService,
+        IUserRepository $userRepository,
+    )
     {
         $this->userService = $userService;
+        $this->userRepository = $userRepository;
     }
 
     public function changePassword(ChangePasswordRequest $request): SuccessResource|ErrorResource
@@ -38,6 +47,30 @@ class UserController extends Controller
         }
         return SuccessResource::make([
             'message' => 'Password changed',
+        ]);
+
+    }
+
+    public function resetPasswordLink(): SuccessResource|ErrorResource
+    {
+        $user = $this->userRepository->find(auth()->user()->id);
+        if (!$user) {
+            return ErrorResource::make([
+                'success' => false,
+                'message' => trans('Something went wrong')
+            ]);
+        }
+
+        $result = $this->userService->resetPasswordLink();
+        if (!$result) {
+            return ErrorResource::make([
+                'success' => false,
+                'message' => trans('Something went wrong')
+            ]);
+        }
+        return SuccessResource::make([
+            'success' => true,
+            'message' => trans('Password reset link has been sent to your email')
         ]);
 
     }

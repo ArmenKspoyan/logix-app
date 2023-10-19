@@ -23,6 +23,7 @@ Route::prefix('auth/')->group(function (){
 Route::middleware(['auth:api'])->group(function () {
     Route::prefix('settings')->group(function () {
         Route::post('/password/change', [UserController::class, 'changePassword']);
+        Route::get('/password/reset-password-link', [UserController::class, 'resetPasswordLink']);
     });
 });
 
