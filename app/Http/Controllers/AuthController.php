@@ -12,17 +12,11 @@ class AuthController extends Controller
 {
 
     /**
-     * @var RegisterService
-     */
-    protected RegisterService $registerService;
-
-    /**
      * AuthController constructor.
      * @param RegisterService $registerService
      */
-    public function __construct(RegisterService $registerService)
+    public function __construct(private readonly RegisterService $registerService)
     {
-        $this->registerService = $registerService;
     }
 
     public function registration(RegisterRequest $request): ErrorResource|SuccessResource

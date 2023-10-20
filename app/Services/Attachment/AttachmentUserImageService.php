@@ -5,7 +5,7 @@ namespace App\Services\Attachment;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class AttachmentService
+class AttachmentUserImageService
 {
 
     public function store($attachment): void

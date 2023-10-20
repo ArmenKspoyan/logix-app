@@ -9,43 +9,24 @@ use App\Http\Requests\User\UploadImage\UploadImageRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
 use App\Repositories\Contracts\User\IUserRepository;
-use App\Services\Attachment\AttachmentService;
+use App\Services\Attachment\AttachmentUserImageService;
 use App\Services\User\UserService;
 
 
 class UserController extends Controller
 {
-
-    /**
-     * @var UserService
-     */
-    protected UserService $userService;
-
-    /**
-     * @var IUserRepository
-     */
-    protected IUserRepository $userRepository;
-
-    /**
-     * @var AttachmentService
-     */
-    protected AttachmentService $attachmentService;
-
     /**
      * UserController constructor.
      * @param UserService $userService
      * @param IUserRepository $userRepository
-     * @param AttachmentService $attachmentService
+     * @param AttachmentUserImageService $attachmentService
      */
     public function __construct(
-        UserService     $userService,
-        IUserRepository $userRepository,
-        AttachmentService $attachmentService,
+        private readonly UserService                $userService,
+        private readonly IUserRepository            $userRepository,
+        private readonly AttachmentUserImageService $attachmentService,
     )
     {
-        $this->userService = $userService;
-        $this->userRepository = $userRepository;
-        $this->attachmentService = $attachmentService;
     }
 
     public function changePassword(ChangePasswordRequest $request): SuccessResource|ErrorResource

@@ -12,17 +12,11 @@ class RegisterService
 {
 
     /**
-     * @var IUserRepository
-     */
-    protected IUserRepository $userRepository;
-
-    /**
      * AuthRepository constructor.
      * @param IUserRepository $userRepository
      */
-    public function __construct(IUserRepository $userRepository)
+    public function __construct(private readonly IUserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     /**

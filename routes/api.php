@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('auth/')->group(function (){
+Route::prefix('auth/')->group(function () {
     Route::post('registration', [AuthController::class, 'registration']);
     Route::post('login', [AuthController::class, 'login']);
 });
@@ -32,4 +33,6 @@ Route::middleware(['auth:api'])->group(function () {
 
     });
 });
+
+Route::apiResource('blogs', BlogController::class);
 
