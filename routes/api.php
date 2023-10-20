@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,13 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('/upload-image', [UserController::class, 'uploadImage']);
 
     });
+
+    Route::prefix('comments')->group(function () {
+        Route::post('/create', [CommentController::class, 'createComment']);
+        Route::post('/update', [CommentController::class, 'updateComment']);
+        Route::delete('/delete/{id}', [CommentController::class, 'deleteComment']);
+    });
+
 });
 
 Route::apiResource('blogs', BlogController::class);
