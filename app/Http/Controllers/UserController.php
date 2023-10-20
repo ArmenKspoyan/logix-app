@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\User\ChangeEmailConfirmRequest;
-use App\Http\Requests\User\ChangeEmailRequest;
-use App\Http\Requests\User\ChangePasswordRequest;
+use App\Http\Requests\User\ChangeEmail\ChangeEmailConfirmRequest;
+use App\Http\Requests\User\ChangeEmail\ChangeEmailRequest;
+use App\Http\Requests\User\ChangePassword\ChangePasswordRequest;
+use App\Http\Requests\User\UploadImage\UploadImageRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
 use App\Repositories\Contracts\User\IUserRepository;
+use App\Services\Attachment\AttachmentService;
 use App\Services\User\UserService;
 
 
@@ -25,17 +27,25 @@ class UserController extends Controller
     protected IUserRepository $userRepository;
 
     /**
+     * @var AttachmentService
+     */
+    protected AttachmentService $attachmentService;
+
+    /**
      * UserController constructor.
      * @param UserService $userService
      * @param IUserRepository $userRepository
+     * @param AttachmentService $attachmentService
      */
     public function __construct(
         UserService     $userService,
         IUserRepository $userRepository,
+        AttachmentService $attachmentService,
     )
     {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
+        $this->attachmentService = $attachmentService;
     }
 
     public function changePassword(ChangePasswordRequest $request): SuccessResource|ErrorResource
@@ -90,6 +100,15 @@ class UserController extends Controller
         $this->userService->changeEmailConfirm($request->validated());
         return SuccessResource::make([
             'message' => 'Email changed',
+        ]);
+    }
+
+    public function uploadImage(UploadImageRequest $request): SuccessResource
+    {
+        $attachment = $request->validated();
+        $this->attachmentService->store($attachment['attachment']);
+        return SuccessResource::make([
+            'message' => 'Upload successfully',
         ]);
     }
 

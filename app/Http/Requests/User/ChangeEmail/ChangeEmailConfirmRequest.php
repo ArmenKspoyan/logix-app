@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\User\ChangeEmail;
 
 use Illuminate\Foundation\Http\FormRequest;
 

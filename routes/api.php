@@ -28,6 +28,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('/email/change', [UserController::class, 'changeEmail']);
         Route::post('/email/change/confirm', [UserController::class, 'changeEmailConfirm']);
 
+        Route::post('/upload-image', [UserController::class, 'uploadImage']);
 
     });
 });
