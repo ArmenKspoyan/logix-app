@@ -16,8 +16,6 @@ class StoreCommentRequest extends FormRequest
         return [
             'id' => 'required|integer',
             'text' => 'required|min:1|max:1000',
-            'is_blog' => 'required|boolean',
-            'is_news' => 'required|boolean',
         ];
     }
 }

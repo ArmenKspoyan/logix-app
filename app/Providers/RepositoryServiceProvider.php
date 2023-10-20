@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Repositories\Blog\BlogRepository;
+use App\Repositories\BlogComment\BlogCommentRepository;
 use App\Repositories\Comment\CommentRepository;
 use App\Repositories\Contracts\Blog\IBlogRepository;
+use App\Repositories\Contracts\BlogComment\IBlogCommentRepository;
 use App\Repositories\Contracts\Comment\ICommentRepository;
 use App\Repositories\Contracts\Image\IImageRepository;
 use App\Repositories\Contracts\News\INewsRepository;
@@ -28,6 +30,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IImageRepository::class, ImageRepository::class);
         $this->app->bind(INewsRepository::class, NewsRepository::class);
         $this->app->bind(ICommentRepository::class, CommentRepository::class);
+        $this->app->bind(IBlogCommentRepository::class, BlogCommentRepository::class);
 
     }
 

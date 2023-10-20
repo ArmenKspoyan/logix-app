@@ -6,8 +6,8 @@ use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
+use App\Repositories\Contracts\BlogComment\IBlogCommentRepository;
 use App\Repositories\Contracts\Comment\ICommentRepository;
-use App\Services\Comment\CommentService;
 
 class CommentController extends Controller
 {
@@ -15,39 +15,51 @@ class CommentController extends Controller
     /**
      * BlogController constructor.
      * @param ICommentRepository $commentRepository
-     * @param CommentService $commentService
+     * @param IBlogCommentRepository $blogCommentRepository
      */
     public function __construct(
-        private readonly ICommentRepository $commentRepository,
-        private readonly CommentService     $commentService,
+        private readonly ICommentRepository     $commentRepository,
+        private readonly IBlogCommentRepository $blogCommentRepository,
     )
     {
     }
 
-    public function createComment(StoreCommentRequest $request): SuccessResource|ErrorResource
+    public function store(StoreCommentRequest $request): SuccessResource|ErrorResource
     {
-        $comment = $this->commentService->createComment($request->validated());
+        $data = $request->validated();
+        $comment = $this->commentRepository->create(
+            [
+                'user_id' => auth()->user()->id,
+                'text' => $data['text'],
+            ]
+        );
         if (!$comment) {
             return ErrorResource::make([
                 'success' => false,
                 'message' => trans('Something went wrong')
             ]);
         }
+        $this->blogCommentRepository->create(
+            [
+                'comment_id' => $comment['id'],
+                'blog_id' => $data['id'],
+            ]
+        );
         return SuccessResource::make([
             'message' => 'Comment created successfully'
         ]);
     }
 
-    public function updateComment(UpdateCommentRequest $request): SuccessResource
+    public function update(UpdateCommentRequest $request, int $id): SuccessResource
     {
         $data = $request->validated();
-        $this->commentRepository->update($data['id'], ['text' => $data['text']]);
+        $this->commentRepository->update($id, ['text' => $data['text']]);
         return SuccessResource::make([
             'message' => 'Comment updated successfully'
         ]);
     }
 
-    public function deleteComment(int $id): SuccessResource|ErrorResource
+    public function delete(int $id): SuccessResource|ErrorResource
     {
         $blog = $this->commentRepository->find($id);
         if (is_null($blog)) {

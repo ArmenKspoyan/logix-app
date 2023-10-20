@@ -35,11 +35,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     });
 
-    Route::prefix('comments')->group(function () {
-        Route::post('/create', [CommentController::class, 'createComment']);
-        Route::post('/update', [CommentController::class, 'updateComment']);
-        Route::delete('/delete/{id}', [CommentController::class, 'deleteComment']);
-    });
+    Route::apiResource('blog-comments', CommentController::class);
 
 });
 
