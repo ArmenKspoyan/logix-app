@@ -2,54 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Blog\StoreBlogRequest;
-use App\Http\Requests\Blog\UpdateBlogRequest;
-use App\Http\Resources\Blog\BlogResource;
+use App\Http\Requests\News\StoreNewsRequest;
+use App\Http\Requests\News\UpdateNewsRequest;
 use App\Http\Resources\ErrorResource;
+use App\Http\Resources\News\NewsResource;
 use App\Http\Resources\PaginationResource;
 use App\Http\Resources\SuccessResource;
-use App\Repositories\Contracts\Blog\IBlogRepository;
-use App\Services\Attachment\AttachmentBlogImagesService;
+use App\Repositories\Contracts\News\INewsRepository;
+use App\Services\Attachment\AttachmentNewsImagesService;
 
-class BlogController extends Controller
+class NewsController extends Controller
 {
-
     /**
      * BlogController constructor.
-     * @param IBlogRepository $blogRepository
-     * @param AttachmentBlogImagesService $attachmentBlogImagesService
+     * @param INewsRepository $newsRepository
+     * @param AttachmentNewsImagesService $attachmentNewsImagesService
      */
     public function __construct(
-        private readonly IBlogRepository             $blogRepository,
-        private readonly AttachmentBlogImagesService $attachmentBlogImagesService,
+        private readonly INewsRepository             $newsRepository,
+        private readonly AttachmentNewsImagesService $attachmentNewsImagesService,
     )
     {
     }
 
     public function index(): PaginationResource
     {
-        $blogs = $this->blogRepository->getBlogs();
+        $blogs = $this->newsRepository->getNews();
         return PaginationResource::make([
-            'data' => BlogResource::collection($blogs->items()),
+            'data' => NewsResource::collection($blogs->items()),
             'pagination' => $blogs
         ]);
 
     }
 
-    public function store(StoreBlogRequest $request): SuccessResource|ErrorResource
+    public function store(StoreNewsRequest $request): SuccessResource|ErrorResource
     {
         $data = $request->validated();
-        $blog = $this->blogRepository->create($data);
+        $news = $this->newsRepository->create($data);
 
-        if (!$blog) {
+        if (!$news) {
             return ErrorResource::make([
                 'success' => false,
                 'message' => trans('Something went wrong')
             ]);
         }
-        $this->attachmentBlogImagesService->store($blog, $data['images']);
+        $this->attachmentNewsImagesService->store($news, $data['images']);
         return SuccessResource::make([
-            'message' => 'Blog created successfully'
+            'message' => 'News created successfully'
         ]);
 
 
@@ -57,7 +56,7 @@ class BlogController extends Controller
 
     public function show(int $id): SuccessResource|ErrorResource
     {
-        $blog = $this->blogRepository->find($id);
+        $blog = $this->newsRepository->find($id);
         if (is_null($blog)) {
             return ErrorResource::make([
                 'success' => false,
@@ -66,40 +65,39 @@ class BlogController extends Controller
         }
 
         return SuccessResource::make([
-            'data' => BlogResource::make($blog),
-            'message' => trans('Single Blog')
+            'data' => NewsResource::make($blog),
+            'message' => trans('Single News')
         ]);
 
     }
 
     public function destroy(int $id): SuccessResource|ErrorResource
     {
-        $blog = $this->blogRepository->find($id);
+        $blog = $this->newsRepository->find($id);
         if (is_null($blog)) {
             return ErrorResource::make([
                 'success' => false,
                 'message' => trans('Something went wrong')
             ]);
         }
-        $this->blogRepository->delete($id);
+        $this->newsRepository->delete($id);
         return SuccessResource::make([
-            'message' => trans('Blog deleted successfully')
+            'message' => trans('News deleted successfully')
         ]);
-
     }
 
-    public function update(UpdateBlogRequest $request, int $id): SuccessResource|ErrorResource
+    public function update(UpdateNewsRequest $request, int $id): SuccessResource|ErrorResource
     {
-        $blog = $this->blogRepository->find($id);
+        $blog = $this->newsRepository->find($id);
         if (is_null($blog)) {
             return ErrorResource::make([
                 'success' => false,
                 'message' => trans('Something went wrong')
             ]);
         }
-        $this->blogRepository->update($id, $request->validated());
+        $this->newsRepository->update($id, $request->validated());
         return SuccessResource::make([
-            'message' => trans('Blog updated successfully')
+            'message' => trans('News updated successfully')
         ]);
     }
 }
