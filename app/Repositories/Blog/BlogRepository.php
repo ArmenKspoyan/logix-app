@@ -21,7 +21,7 @@ class BlogRepository extends BaseRepository implements IBlogRepository
     {
         return QueryBuilder::for($this->model)
             ->select('blogs.*')
-            ->with(['images'])
+            ->with(['images','comments'])
             ->allowedFilters([
                 AllowedFilter::custom('search', new SearchFilter),
             ])

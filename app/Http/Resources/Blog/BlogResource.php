@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Blog;
 
+use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\Image\ImageResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,6 +21,7 @@ class BlogResource extends JsonResource
             'name' => $this->resource->name,
             'description' => $this->resource->description,
             'images' => ImageResource::collection($this->whenLoaded('images')),
+            'comments' => CommentResource::collection($this->whenLoaded('comments')),
         ];
     }
 }

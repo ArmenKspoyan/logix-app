@@ -31,7 +31,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request): SuccessResource|ErrorResource
     {
         $data = $request->validated();
-        $comment = $this->commentRepository->create(['text' => $data['text']]);
+        $comment = $this->commentRepository->create(['text' => $data['text'], 'blog_id' => $data['id']]);
         if (!$comment) {
             return ErrorResource::make([
                 'success' => false,
