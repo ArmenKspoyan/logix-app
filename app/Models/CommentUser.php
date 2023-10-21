@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class UserComment extends Model
+class CommentUser extends Pivot
 {
     use HasFactory;
+    protected $table = 'comment_users';
 
     /**
      * The attributes that are mass assignable.

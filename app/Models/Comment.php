@@ -25,7 +25,7 @@ class Comment extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'comment_users', 'comment_id', 'user_id')->using(CommentUser::class);
     }
 
     public function blog(): BelongsTo

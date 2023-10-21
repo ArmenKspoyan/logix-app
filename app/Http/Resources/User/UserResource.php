@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Comment;
+namespace App\Http\Resources\User;
 
-use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CommentResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +16,7 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'text' => $this->resource->text,
-            'users' => UserResource::collection($this->whenLoaded('users')),
+            'name' => $this->resource->name,
         ];
     }
 }

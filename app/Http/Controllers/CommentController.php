@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\StoreSubCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
+use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\ErrorResource;
+use App\Http\Resources\PaginationResource;
 use App\Http\Resources\SuccessResource;
 use App\Repositories\Contracts\BlogComment\IBlogCommentRepository;
 use App\Repositories\Contracts\Comment\ICommentRepository;
@@ -79,5 +81,14 @@ class CommentController extends Controller
             'message' => 'Sub Comment created successfully'
         ]);
 
+    }
+
+    public function index(): PaginationResource
+    {
+        $comments = $this->commentRepository->getComments();
+        return PaginationResource::make([
+            'data' => CommentResource::collection($comments->items()),
+            'pagination' => $comments
+        ]);
     }
 }

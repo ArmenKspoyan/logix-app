@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function comments(): BelongsToMany
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->belongsToMany(Comment::class, 'comment_users', 'user_id', 'comment_id')->using(CommentUser::class);
     }
 }
