@@ -1,756 +1,824 @@
 {
-	"info": {
-		"_postman_id": "cc27d9a0-b5bc-490a-9b78-363c67c12f40",
-		"name": "Logix",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Register",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Armen",
-									"type": "text"
-								},
-								{
-									"key": "last_name",
-									"value": "Kspoyan",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "armen2@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123456",
-									"type": "text"
-								},
-								{
-									"key": "password_confirmation",
-									"value": "123456",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{SITE_URL}}auth/registration",
-							"host": [
-								"{{SITE_URL}}auth"
-							],
-							"path": [
-								"registration"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "email",
-									"value": "armen1@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123456",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{SITE_URL}}auth/login",
-							"host": [
-								"{{SITE_URL}}auth"
-							],
-							"path": [
-								"login"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "Settings",
-					"item": [
-						{
-							"name": "Cange Password",
-							"item": [
-								{
-									"name": "Reset Password Link",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{SITE_URL}}settings/password/reset-password-link",
-											"host": [
-												"{{SITE_URL}}settings"
-											],
-											"path": [
-												"password",
-												"reset-password-link"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Changed Password",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "current_password",
-													"value": "1234567",
-													"type": "text"
-												},
-												{
-													"key": "password",
-													"value": "123456",
-													"type": "text"
-												},
-												{
-													"key": "password_confirmation",
-													"value": "123456",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{SITE_URL}}settings/password/change",
-											"host": [
-												"{{SITE_URL}}settings"
-											],
-											"path": [
-												"password",
-												"change"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "Change Email",
-							"item": [
-								{
-									"name": "Change Email",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "email",
-													"value": "armen@gmail.com",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{SITE_URL}}settings/email/change",
-											"host": [
-												"{{SITE_URL}}settings"
-											],
-											"path": [
-												"email",
-												"change"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Change Email Confirm",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "email",
-													"value": "test@gmail.com",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{SITE_URL}}settings/email/change/confirm",
-											"host": [
-												"{{SITE_URL}}settings"
-											],
-											"path": [
-												"email",
-												"change",
-												"confirm"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "Upload Image",
-							"item": [
-								{
-									"name": "Upload Image",
-									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {}
-									},
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "attachment",
-													"type": "file",
-													"src": "/home/armen/Downloads/IMG_3993.JPG"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{SITE_URL}}settings/upload-image",
-											"host": [
-												"{{SITE_URL}}settings"
-											],
-											"path": [
-												"upload-image"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Blog",
-			"item": [
-				{
-					"name": "Store",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Blog1",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-									"type": "text"
-								},
-								{
-									"key": "images[]",
-									"type": "file",
-									"src": "/home/armen/Downloads/IMG_3993.JPG"
-								},
-								{
-									"key": "images[]",
-									"type": "file",
-									"src": "/home/armen/Downloads/IMG_3993.JPG"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{SITE_URL}}blogs",
-							"host": [
-								"{{SITE_URL}}blogs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Blogs",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "{{SITE_URL}}blogs",
-							"host": [
-								"{{SITE_URL}}blogs"
-							],
-							"query": [
-								{
-									"key": "filter[search]",
-									"value": "Blog1",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Destroy",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}blogs/2",
-							"host": [
-								"{{SITE_URL}}blogs"
-							],
-							"path": [
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"blog update\",\n    \"description\":\"blog update description\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{SITE_URL}}blogs/8",
-							"host": [
-								"{{SITE_URL}}blogs"
-							],
-							"path": [
-								"8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}blogs/8",
-							"host": [
-								"{{SITE_URL}}blogs"
-							],
-							"path": [
-								"8"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "News",
-			"item": [
-				{
-					"name": "Store",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "news3",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "description1",
-									"type": "text"
-								},
-								{
-									"key": "images[]",
-									"type": "file",
-									"src": "/home/armen/Downloads/IMG_3993.JPG"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{SITE_URL}}news",
-							"host": [
-								"{{SITE_URL}}news"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Destroy",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}news/1",
-							"host": [
-								"{{SITE_URL}}news"
-							],
-							"path": [
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"news update\",\n    \"description\":\"news update description\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{SITE_URL}}news/1",
-							"host": [
-								"{{SITE_URL}}news"
-							],
-							"path": [
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get News",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}news",
-							"host": [
-								"{{SITE_URL}}news"
-							],
-							"query": [
-								{
-									"key": "filter[search]",
-									"value": "news1",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}news/1",
-							"host": [
-								"{{SITE_URL}}news"
-							],
-							"path": [
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Blog Coment",
-			"item": [
-				{
-					"name": "Create Comment",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "id",
-									"value": "22",
-									"type": "text"
-								},
-								{
-									"key": "text",
-									"value": "blog comment user id 4",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{SITE_URL}}blog-comments",
-							"host": [
-								"{{SITE_URL}}blog-comments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"text\":\"heloooololl\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{SITE_URL}}blog-comments/2",
-							"host": [
-								"{{SITE_URL}}blog-comments"
-							],
-							"path": [
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Destroy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}comments/delete/1",
-							"host": [
-								"{{SITE_URL}}comments"
-							],
-							"path": [
-								"delete",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Sub Comment",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "comment_id",
-									"value": "16",
-									"type": "text"
-								},
-								{
-									"key": "text",
-									"value": "sub comment",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{SITE_URL}}sub-comment",
-							"host": [
-								"{{SITE_URL}}sub-comment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{SITE_URL}}blog-comments",
-							"host": [
-								"{{SITE_URL}}blog-comments"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+    "info": {
+        "_postman_id": "cc27d9a0-b5bc-490a-9b78-363c67c12f40",
+        "name": "Logix",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "protocolProfileBehavior": {
+                        "disabledSystemHeaders": {
+                            "accept": true
+                        }
+                    },
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Armen",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "last_name",
+                                    "value": "Kspoyan",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "armen2@gmail.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123456",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password_confirmation",
+                                    "value": "123456",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}auth/registration",
+                            "host": [
+                                "{{SITE_URL}}auth"
+                            ],
+                            "path": [
+                                "registration"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "email",
+                                    "value": "armen1@gmail.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123456",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}auth/login",
+                            "host": [
+                                "{{SITE_URL}}auth"
+                            ],
+                            "path": [
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "User",
+            "item": [
+                {
+                    "name": "Settings",
+                    "item": [
+                        {
+                            "name": "Cange Password",
+                            "item": [
+                                {
+                                    "name": "Reset Password Link",
+                                    "request": {
+                                        "auth": {
+                                            "type": "bearer",
+                                            "bearer": [
+                                                {
+                                                    "key": "token",
+                                                    "value": "{{token}}",
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "method": "GET",
+                                        "header": [],
+                                        "url": {
+                                            "raw": "{{SITE_URL}}settings/password/reset-password-link",
+                                            "host": [
+                                                "{{SITE_URL}}settings"
+                                            ],
+                                            "path": [
+                                                "password",
+                                                "reset-password-link"
+                                            ]
+                                        }
+                                    },
+                                    "response": []
+                                },
+                                {
+                                    "name": "Changed Password",
+                                    "request": {
+                                        "auth": {
+                                            "type": "bearer",
+                                            "bearer": [
+                                                {
+                                                    "key": "token",
+                                                    "value": "{{token}}",
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "method": "POST",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "current_password",
+                                                    "value": "1234567",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password",
+                                                    "value": "123456",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password_confirmation",
+                                                    "value": "123456",
+                                                    "type": "text"
+                                                }
+                                            ]
+                                        },
+                                        "url": {
+                                            "raw": "{{SITE_URL}}settings/password/change",
+                                            "host": [
+                                                "{{SITE_URL}}settings"
+                                            ],
+                                            "path": [
+                                                "password",
+                                                "change"
+                                            ]
+                                        }
+                                    },
+                                    "response": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Change Email",
+                            "item": [
+                                {
+                                    "name": "Change Email",
+                                    "request": {
+                                        "auth": {
+                                            "type": "bearer",
+                                            "bearer": [
+                                                {
+                                                    "key": "token",
+                                                    "value": "{{token}}",
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "method": "POST",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "email",
+                                                    "value": "armen@gmail.com",
+                                                    "type": "text"
+                                                }
+                                            ]
+                                        },
+                                        "url": {
+                                            "raw": "{{SITE_URL}}settings/email/change",
+                                            "host": [
+                                                "{{SITE_URL}}settings"
+                                            ],
+                                            "path": [
+                                                "email",
+                                                "change"
+                                            ]
+                                        }
+                                    },
+                                    "response": []
+                                },
+                                {
+                                    "name": "Change Email Confirm",
+                                    "request": {
+                                        "auth": {
+                                            "type": "bearer",
+                                            "bearer": [
+                                                {
+                                                    "key": "token",
+                                                    "value": "{{token}}",
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "method": "POST",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "email",
+                                                    "value": "test@gmail.com",
+                                                    "type": "text"
+                                                }
+                                            ]
+                                        },
+                                        "url": {
+                                            "raw": "{{SITE_URL}}settings/email/change/confirm",
+                                            "host": [
+                                                "{{SITE_URL}}settings"
+                                            ],
+                                            "path": [
+                                                "email",
+                                                "change",
+                                                "confirm"
+                                            ]
+                                        }
+                                    },
+                                    "response": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Upload Image",
+                            "item": [
+                                {
+                                    "name": "Upload Image",
+                                    "protocolProfileBehavior": {
+                                        "disabledSystemHeaders": {}
+                                    },
+                                    "request": {
+                                        "auth": {
+                                            "type": "bearer",
+                                            "bearer": [
+                                                {
+                                                    "key": "token",
+                                                    "value": "{{token}}",
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "method": "POST",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "attachment",
+                                                    "type": "file",
+                                                    "src": "/home/armen/Downloads/IMG_3993.JPG"
+                                                }
+                                            ]
+                                        },
+                                        "url": {
+                                            "raw": "{{SITE_URL}}settings/upload-image",
+                                            "host": [
+                                                "{{SITE_URL}}settings"
+                                            ],
+                                            "path": [
+                                                "upload-image"
+                                            ]
+                                        }
+                                    },
+                                    "response": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Blog",
+            "item": [
+                {
+                    "name": "Store",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Blog1",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "images[]",
+                                    "type": "file",
+                                    "src": "/home/armen/Downloads/IMG_3993.JPG"
+                                },
+                                {
+                                    "key": "images[]",
+                                    "type": "file",
+                                    "src": "/home/armen/Downloads/IMG_3993.JPG"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}blogs",
+                            "host": [
+                                "{{SITE_URL}}blogs"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Blogs",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": []
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}blogs",
+                            "host": [
+                                "{{SITE_URL}}blogs"
+                            ],
+                            "query": [
+                                {
+                                    "key": "filter[search]",
+                                    "value": "Blog1",
+                                    "disabled": true
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Destroy",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}blogs/2",
+                            "host": [
+                                "{{SITE_URL}}blogs"
+                            ],
+                            "path": [
+                                "2"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\":\"blog update\",\n    \"description\":\"blog update description\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}blogs/8",
+                            "host": [
+                                "{{SITE_URL}}blogs"
+                            ],
+                            "path": [
+                                "8"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get By Id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}blogs/8",
+                            "host": [
+                                "{{SITE_URL}}blogs"
+                            ],
+                            "path": [
+                                "8"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "News",
+            "item": [
+                {
+                    "name": "Store",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "news3",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "description1",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "images[]",
+                                    "type": "file",
+                                    "src": "/home/armen/Downloads/IMG_3993.JPG"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}news",
+                            "host": [
+                                "{{SITE_URL}}news"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Destroy",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}news/1",
+                            "host": [
+                                "{{SITE_URL}}news"
+                            ],
+                            "path": [
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\":\"news update\",\n    \"description\":\"news update description\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}news/1",
+                            "host": [
+                                "{{SITE_URL}}news"
+                            ],
+                            "path": [
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get News",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}news",
+                            "host": [
+                                "{{SITE_URL}}news"
+                            ],
+                            "query": [
+                                {
+                                    "key": "filter[search]",
+                                    "value": "news1",
+                                    "disabled": true
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get By Id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}news/1",
+                            "host": [
+                                "{{SITE_URL}}news"
+                            ],
+                            "path": [
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Blog Coment",
+            "item": [
+                {
+                    "name": "Create Comment",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "id",
+                                    "value": "22",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "text",
+                                    "value": "blog comment user id 4",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}blog-comments",
+                            "host": [
+                                "{{SITE_URL}}blog-comments"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "protocolProfileBehavior": {
+                        "disabledSystemHeaders": {
+                            "accept": true
+                        }
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"text\":\"heloooololl\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}blog-comments/2",
+                            "host": [
+                                "{{SITE_URL}}blog-comments"
+                            ],
+                            "path": [
+                                "2"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Destroy",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}comments/delete/1",
+                            "host": [
+                                "{{SITE_URL}}comments"
+                            ],
+                            "path": [
+                                "delete",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Sub Comment",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "comment_id",
+                                    "value": "16",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "text",
+                                    "value": "sub comment",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}sub-comment",
+                            "host": [
+                                "{{SITE_URL}}sub-comment"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}blog-comments",
+                            "host": [
+                                "{{SITE_URL}}blog-comments"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "News Comment",
+            "item": [
+                {
+                    "name": "Store",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "id",
+                                    "value": "13",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "text",
+                                    "value": "ghjfcjhdfjsdfhjsdfhdshfjhsdfjh",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{SITE_URL}}news-comments",
+                            "host": [
+                                "{{SITE_URL}}news-comments"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{SITE_URL}}news-comments",
+                            "host": [
+                                "{{SITE_URL}}news-comments"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
 }
