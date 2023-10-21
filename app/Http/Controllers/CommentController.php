@@ -8,6 +8,7 @@ use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
 use App\Repositories\Contracts\BlogComment\IBlogCommentRepository;
 use App\Repositories\Contracts\Comment\ICommentRepository;
+use App\Repositories\Contracts\UserComment\IUserCommentRepository;
 
 class CommentController extends Controller
 {
@@ -16,10 +17,12 @@ class CommentController extends Controller
      * BlogController constructor.
      * @param ICommentRepository $commentRepository
      * @param IBlogCommentRepository $blogCommentRepository
+     * @param IUserCommentRepository $userCommentRepository
      */
     public function __construct(
         private readonly ICommentRepository     $commentRepository,
         private readonly IBlogCommentRepository $blogCommentRepository,
+        private readonly IUserCommentRepository $userCommentRepository,
     )
     {
     }
@@ -27,24 +30,15 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request): SuccessResource|ErrorResource
     {
         $data = $request->validated();
-        $comment = $this->commentRepository->create(
-            [
-                'user_id' => auth()->user()->id,
-                'text' => $data['text'],
-            ]
-        );
+        $comment = $this->commentRepository->create(['text' => $data['text']]);
         if (!$comment) {
             return ErrorResource::make([
                 'success' => false,
                 'message' => trans('Something went wrong')
             ]);
         }
-        $this->blogCommentRepository->create(
-            [
-                'comment_id' => $comment['id'],
-                'blog_id' => $data['id'],
-            ]
-        );
+        $this->blogCommentRepository->create(['comment_id' => $comment['id'], 'blog_id' => $data['id']]);
+        $this->userCommentRepository->create(['comment_id' => $comment['id'], 'user_id' => auth()->user()->id]);
         return SuccessResource::make([
             'message' => 'Comment created successfully'
         ]);
