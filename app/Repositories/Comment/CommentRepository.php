@@ -15,12 +15,23 @@ class CommentRepository extends BaseRepository implements ICommentRepository
         parent::__construct($model);
     }
 
-    public function getComments(): LengthAwarePaginator
+    public function getCommentsByBlog(): LengthAwarePaginator
     {
         return QueryBuilder::for($this->model)
             ->select('comments.*')
             ->with(['users'])
             ->whereNotNull('blog_id')
+            ->whereNull('news_id')
+            ->paginate(request()->query("per_page", 10));
+    }
+
+    public function getCommentsByNews(): LengthAwarePaginator
+    {
+        return QueryBuilder::for($this->model)
+            ->select('comments.*')
+            ->with(['users'])
+            ->whereNotNull('news_id')
+            ->whereNull('blog_id')
             ->paginate(request()->query("per_page", 10));
     }
 

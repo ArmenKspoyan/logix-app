@@ -33,7 +33,11 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request): SuccessResource|ErrorResource
     {
         $data = $request->validated();
-        $comment = $this->commentRepository->create(['text' => $data['text'], 'blog_id' => $data['id']]);
+        $comment = $this->commentRepository->create([
+            'text' => $data['text'],
+            'blog_id' => $data['id'],
+            'news_id' => null,
+        ]);
         if (!$comment) {
             return ErrorResource::make([
                 'success' => false,
@@ -85,7 +89,7 @@ class CommentController extends Controller
 
     public function index(): PaginationResource
     {
-        $comments = $this->commentRepository->getComments();
+        $comments = $this->commentRepository->getCommentsByBlog();
         return PaginationResource::make([
             'data' => CommentResource::collection($comments->items()),
             'pagination' => $comments

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::apiResource('blog-comments', CommentController::class);
     Route::post('sub-comment', [CommentController::class, 'createSubComment']);
+
+    Route::apiResource('news-comments', NewsCommentController::class);
 
 });
 
