@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Comment\StoreCommentRequest;
+use App\Http\Requests\Comment\StoreSubCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
@@ -66,5 +67,17 @@ class CommentController extends Controller
         return SuccessResource::make([
             'message' => trans('Comment deleted successfully')
         ]);
+    }
+
+    public function createSubComment(StoreSubCommentRequest $request): SuccessResource
+    {
+        $data = $request->validated();
+        $this->commentRepository->create(['parent_id' => $data['comment_id'], 'text' => $data['text']]);
+        $this->userCommentRepository->create(['comment_id' => $data['comment_id'], 'user_id' => auth()->user()->id]);
+
+        return SuccessResource::make([
+            'message' => 'Sub Comment created successfully'
+        ]);
+
     }
 }

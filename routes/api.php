@@ -36,6 +36,7 @@ Route::middleware(['auth:api'])->group(function () {
     });
 
     Route::apiResource('blog-comments', CommentController::class);
+    Route::post('sub-comment', [CommentController::class, 'createSubComment']);
 
 });
 

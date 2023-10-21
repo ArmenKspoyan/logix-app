@@ -15,9 +15,7 @@ class Comment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'blog_id',
-        'news_id',
+        'parent_id',
         'text',
     ];
 }
